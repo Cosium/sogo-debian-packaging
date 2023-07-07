@@ -12,9 +12,13 @@ if [ ! -f "$CONFIG_FILE" ] && [ -z ${CI+x} ]; then
     exit 1
 fi
 
-set -a
-. "$CONFIG_FILE"
-set +a
+# When running in CI do not source configuration file
+if [ -z ${CI+x} ]; then
+    set -a
+    # shellcheck source=.env disable=SC1091
+    . "$CONFIG_FILE"
+    set +a
+fi
 
 REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
 REPOSITORY_SOPE="https://github.com/Alinto/sope.git"

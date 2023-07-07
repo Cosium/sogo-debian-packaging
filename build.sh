@@ -107,8 +107,8 @@ echo "cd $PACKAGES_DIR"
 cd "$PACKAGES_DIR"
 
 # Install the built packages
-echo "dpkg -i \"sope4.9-gdl1-postgresql_${VERSION_TO_BUILD}_amd64.deb\""
-dpkg -i "sope4.9-gdl1-postgresql_${VERSION_TO_BUILD}_amd64.deb"
+echo "dpkg -i \"sope4.9-gdl1-${SOGO_DATABASE_ENGINE}_${VERSION_TO_BUILD}_amd64.deb\""
+dpkg -i "sope4.9-gdl1-${SOGO_DATABASE_ENGINE}_${VERSION_TO_BUILD}_amd64.deb"
 echo "dpkg -i \"sope4.9-libxmlsaxdriver_${VERSION_TO_BUILD}_amd64.deb\""
 dpkg -i "sope4.9-libxmlsaxdriver_${VERSION_TO_BUILD}_amd64.deb"
 echo "dpkg -i \"sogo_${VERSION_TO_BUILD}_amd64.deb\""

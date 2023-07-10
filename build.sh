@@ -20,9 +20,13 @@ if [ -z ${CI+x} ]; then
     set +a
 fi
 
+echo "REPOSITORY_SOGO=\"https://github.com/Alinto/sogo.git\""
 REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
+echo "REPOSITORY_SOPE=\"https://github.com/Alinto/sope.git\""
 REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
+echo "SOGO_GIT_TAG=\"SOGo-${VERSION_TO_BUILD}\""
 SOGO_GIT_TAG="SOGo-${VERSION_TO_BUILD}"
+echo "SOPE_GIT_TAG=\"SOPE-${VERSION_TO_BUILD}\""
 SOPE_GIT_TAG="SOPE-${VERSION_TO_BUILD}"
 
 echo "PACKAGES_DIR=\"${BASE_DIR}/vendor\""
@@ -111,9 +115,15 @@ echo "cd $PACKAGES_DIR"
 cd "$PACKAGES_DIR"
 
 # Install the built packages
+echo "dpkg -i \"sope4.9-appserver_${VERSION_TO_BUILD}_amd64.deb\""
+dpkg -i "sope4.9-appserver_${VERSION_TO_BUILD}_amd64.deb"
 echo "dpkg -i \"sope4.9-gdl1-${SOGO_DATABASE_ENGINE}_${VERSION_TO_BUILD}_amd64.deb\""
 dpkg -i "sope4.9-gdl1-${SOGO_DATABASE_ENGINE}_${VERSION_TO_BUILD}_amd64.deb"
 echo "dpkg -i \"sope4.9-libxmlsaxdriver_${VERSION_TO_BUILD}_amd64.deb\""
 dpkg -i "sope4.9-libxmlsaxdriver_${VERSION_TO_BUILD}_amd64.deb"
+echo "dpkg -i \"sope4.9-stxsaxdriver_${VERSION_TO_BUILD}_amd64.deb\""
+dpkg -i "sope4.9-stxsaxdriver_${VERSION_TO_BUILD}_amd64.deb"
 echo "dpkg -i \"sogo_${VERSION_TO_BUILD}_amd64.deb\""
 dpkg -i "sogo_${VERSION_TO_BUILD}_amd64.deb"
+echo "dpkg -i \"sogo-activesync_${VERSION_TO_BUILD}_amd64.deb\""
+dpkg -i "sogo-activesync_${VERSION_TO_BUILD}_amd64.deb"

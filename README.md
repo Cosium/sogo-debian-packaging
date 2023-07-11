@@ -10,6 +10,3 @@
 
 ## Older Debian releases
 See the respective branches for older Debian releases
-
-## GitLab CI support
-See `.gitlab-ci.yml` for integration with GitLab CI

@@ -63,9 +63,14 @@ echo "==========="
 cd "$PACKAGES_DIR"
 
 # Do not install recommended or suggested packages
+echo "==========="
 echo "'APT::Get::Install-Recommends \"false\";' >> /etc/apt/apt.conf"
+echo "==========="
 echo 'APT::Get::Install-Recommends "false";' >> /etc/apt/apt.conf
+
+echo "==========="
 echo "'APT::Get::Install-Suggests \"false\";' >> /etc/apt/apt.conf"
+echo "==========="
 echo 'APT::Get::Install-Suggests "false";' >> /etc/apt/apt.conf
 
 # Install required packages

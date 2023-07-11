@@ -139,7 +139,7 @@ echo "dch --newversion \"$VERSION_TO_BUILD\" \"Automated build for version $VERS
 echo "==========="
 dch --newversion "$VERSION_TO_BUILD" "Automated build for version $VERSION_TO_BUILD"
 
-# Adding mfa support to debian 12
+# Adding mfa support to debian 12 - To remove once sogo adds support for bookworm packaging
 echo "==========="
 echo "sed -i '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\\\nifeq (\$(DIST_CODENAME), bookworm)\\\nMFA_CONFIG=--enable-mfa\\\nendif\\\n' debian/rules"
 echo "==========="

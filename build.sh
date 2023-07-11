@@ -2,15 +2,7 @@
 
 set -e
 
-echo "==========="
-echo "BASE_DIR=\"$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )\""
-echo "==========="
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-
-# Path to config file
-echo "==========="
-echo "CONFIG_FILE=\"${BASE_DIR}/.env\""
-echo "==========="
 CONFIG_FILE="${BASE_DIR}/.env"
 
 if [ ! -f "$CONFIG_FILE" ] && [ -z ${CI+x} ]; then
@@ -22,39 +14,12 @@ set -a
 . "$CONFIG_FILE"
 set +a
 
-echo "==========="
-echo "REPOSITORY_SOGO=\"https://github.com/Alinto/sogo.git\""
-echo "==========="
 REPOSITORY_SOGO="https://github.com/Alinto/sogo.git"
-
-echo "==========="
-echo "REPOSITORY_SOPE=\"https://github.com/Alinto/sope.git\""
-echo "==========="
 REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
-
-echo "==========="
-echo "SOGO_GIT_TAG=\"SOGo-${VERSION_TO_BUILD}\""
-echo "==========="
 SOGO_GIT_TAG="SOGo-${VERSION_TO_BUILD}"
-
-echo "==========="
-echo "SOPE_GIT_TAG=\"SOPE-${VERSION_TO_BUILD}\""
-echo "==========="
 SOPE_GIT_TAG="SOPE-${VERSION_TO_BUILD}"
-
-echo "==========="
-echo "PACKAGES_DIR=\"${BASE_DIR}/vendor\""
-echo "==========="
 PACKAGES_DIR="${BASE_DIR}/vendor"
-
-echo "==========="
-echo "PACKAGES_TO_INSTALL=\"python-is-python3 build-essential git zip wget make debhelper gnustep-make libssl-dev libgnustep-base-dev libldap2-dev libytnef0-dev zlib1g-dev libpq-dev libmariadbclient-dev-compat libmemcached-dev liblasso3-dev libcurl4-gnutls-dev devscripts libexpat1-dev libpopt-dev libsbjson-dev libsbjson2.3 libcurl4 liboath-dev libsodium-dev libzip-dev\""
-echo "==========="
 PACKAGES_TO_INSTALL="python-is-python3 build-essential git zip wget make debhelper gnustep-make libssl-dev libgnustep-base-dev libldap2-dev libytnef0-dev zlib1g-dev libpq-dev libmariadbclient-dev-compat libmemcached-dev liblasso3-dev libcurl4-gnutls-dev devscripts libexpat1-dev libpopt-dev libsbjson-dev libsbjson2.3 libcurl4 liboath-dev libsodium-dev libzip-dev"
-
-echo "==========="
-echo "export DEBIAN_FRONTEND=noninteractive"
-echo "==========="
 export DEBIAN_FRONTEND=noninteractive
 
 echo "==========="
@@ -176,9 +141,9 @@ dch --newversion "$VERSION_TO_BUILD" "Automated build for version $VERSION_TO_BU
 
 # Adding mfa support to debian 12
 echo "==========="
-echo "sed '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\\\nifeq (\$(DIST_CODENAME), bookworm)\\\nMFA_CONFIG=--enable-mfa\\\nendif\\\n' debian/rules"
+echo "sed -i '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\\\nifeq (\$(DIST_CODENAME), bookworm)\\\nMFA_CONFIG=--enable-mfa\\\nendif\\\n' debian/rules"
 echo "==========="
-sed '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\nifeq ($(DIST_CODENAME), bookworm)\nMFA_CONFIG=--enable-mfa\nendif\n' debian/rules
+sed -i '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\nifeq ($(DIST_CODENAME), bookworm)\nMFA_CONFIG=--enable-mfa\nendif\n' debian/rules
 
 echo "==========="
 echo "./debian/rules"

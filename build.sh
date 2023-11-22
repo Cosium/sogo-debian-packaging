@@ -46,14 +46,14 @@ apt update && apt install -y $PACKAGES_TO_INSTALL
 
 # Download and install libwbxml2 and libwbxml2-dev
 echo "==========="
-echo "wget -c https://packages.sogo.nu/nightly/5/debian/pool/bullseye/w/wbxml2/libwbxml2-dev_0.11.8-1_amd64.deb"
+echo "wget -c https://packages.sogo.nu/nightly/5/debian/pool/bookworm/w/wbxml2/libwbxml2-dev_0.11.8-1_amd64.deb"
 echo "==========="
-wget -c https://packages.sogo.nu/nightly/5/debian/pool/bullseye/w/wbxml2/libwbxml2-dev_0.11.8-1_amd64.deb
+wget -c https://packages.sogo.nu/nightly/5/debian/pool/bookworm/w/wbxml2/libwbxml2-dev_0.11.8-1_amd64.deb
 
 echo "==========="
-echo "wget -c https://packages.sogo.nu/nightly/5/debian/pool/bullseye/w/wbxml2/libwbxml2-0_0.11.8-1_amd64.deb"
+echo "wget -c https://packages.sogo.nu/nightly/5/debian/pool/bookworm/w/wbxml2/libwbxml2-0_0.11.8-1_amd64.deb"
 echo "==========="
-wget -c https://packages.sogo.nu/nightly/5/debian/pool/bullseye/w/wbxml2/libwbxml2-0_0.11.8-1_amd64.deb
+wget -c https://packages.sogo.nu/nightly/5/debian/pool/bookworm/w/wbxml2/libwbxml2-0_0.11.8-1_amd64.deb
 
 echo "==========="
 echo "dpkg -i libwbxml2-0_0.11.8-1_amd64.deb libwbxml2-dev_0.11.8-1_amd64.deb"
@@ -138,12 +138,6 @@ echo "==========="
 echo "dch --newversion \"$VERSION_TO_BUILD\" \"Automated build for version $VERSION_TO_BUILD\""
 echo "==========="
 dch --newversion "$VERSION_TO_BUILD" "Automated build for version $VERSION_TO_BUILD"
-
-# Adding mfa support to debian 12 - To remove once sogo adds support for bookworm packaging
-echo "==========="
-echo "sed -i '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\\\nifeq (\$(DIST_CODENAME), bookworm)\\\nMFA_CONFIG=--enable-mfa\\\nendif\\\n' debian/rules"
-echo "==========="
-sed -i '/^include \/etc\/GNUstep\/GNUstep.conf/i # Debian 12\nifeq ($(DIST_CODENAME), bookworm)\nMFA_CONFIG=--enable-mfa\nendif\n' debian/rules
 
 echo "==========="
 echo "./debian/rules"

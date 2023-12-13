@@ -42,7 +42,7 @@ echo 'APT::Get::Install-Suggests "false";' >> /etc/apt/apt.conf
 echo "==========="
 echo "apt update && apt install -y $PACKAGES_TO_INSTALL"
 echo "==========="
-apt update && apt install -y $PACKAGES_TO_INSTALL
+apt update && apt install -y "$PACKAGES_TO_INSTALL"
 
 # Download and install libwbxml2 and libwbxml2-dev
 echo "==========="

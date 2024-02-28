@@ -2,7 +2,7 @@
 
 set -e
 
-BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 CONFIG_FILE="${BASE_DIR}/.env"
 
 if [ ! -f "$CONFIG_FILE" ] && [ -z ${CI+x} ]; then
@@ -19,7 +19,7 @@ REPOSITORY_SOPE="https://github.com/Alinto/sope.git"
 SOGO_GIT_TAG="SOGo-${VERSION_TO_BUILD}"
 SOPE_GIT_TAG="SOPE-${VERSION_TO_BUILD}"
 PACKAGES_DIR="${BASE_DIR}/vendor"
-PACKAGES_TO_INSTALL="python-is-python3 build-essential git zip wget make debhelper gnustep-make libssl-dev libgnustep-base-dev libldap2-dev libytnef0-dev zlib1g-dev libpq-dev libmariadbclient-dev-compat libmemcached-dev liblasso3-dev libcurl4-gnutls-dev devscripts libexpat1-dev libpopt-dev libsbjson-dev libsbjson2.3 libcurl4 liboath-dev libsodium-dev libzip-dev"
+PACKAGES_TO_INSTALL="build-essential debhelper devscripts git gnustep-make libcurl4 libcurl4-gnutls-dev libexpat1-dev libgnustep-base-dev liblasso3-dev libldap2-dev libmariadbclient-dev-compat libmemcached-dev liboath-dev libpopt-dev libpq-dev libsbjson-dev libsbjson2.3 libsodium-dev libssl-dev libytnef0-dev libzip-dev make python-is-python3 wget zip zlib1g-dev"
 export DEBIAN_FRONTEND=noninteractive
 
 echo "==========="
@@ -31,18 +31,19 @@ cd "$PACKAGES_DIR"
 echo "==========="
 echo "'APT::Get::Install-Recommends \"false\";' >> /etc/apt/apt.conf"
 echo "==========="
-echo 'APT::Get::Install-Recommends "false";' >> /etc/apt/apt.conf
+echo 'APT::Get::Install-Recommends "false";' >>/etc/apt/apt.conf
 
 echo "==========="
 echo "'APT::Get::Install-Suggests \"false\";' >> /etc/apt/apt.conf"
 echo "==========="
-echo 'APT::Get::Install-Suggests "false";' >> /etc/apt/apt.conf
+echo 'APT::Get::Install-Suggests "false";' >>/etc/apt/apt.conf
 
 # Install required packages
 echo "==========="
 echo "apt update && apt install -y $PACKAGES_TO_INSTALL"
 echo "==========="
-apt update && apt install -y "$PACKAGES_TO_INSTALL"
+apt update && apt install -y $PACKAGES_TO_INSTALL
+apt update
 
 # Download and install libwbxml2 and libwbxml2-dev
 echo "==========="
